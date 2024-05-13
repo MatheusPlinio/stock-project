@@ -8,6 +8,11 @@ const config: Config = {
   ],
   theme: {
     extend: {
+      colors: {
+        blueb2bit: "#02274F",
+        blueb2bithover: "#0149B7",
+        yellowb2bit: "#FDCF00"
+      },
       backgroundImage: {
         "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
         "gradient-conic":
