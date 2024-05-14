@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import "./globals.css";
+import NextAuthSessionProvider from "@/providers/sessionProvider";
 
 export const metadata: Metadata = {
   title: "B2bit Sign-in",
@@ -13,7 +14,12 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className="flex justify-center items-center min-h-screen">{children}</body>
+      <body className="flex justify-center items-center min-h-screen">
+
+        <NextAuthSessionProvider>
+          {children}
+        </NextAuthSessionProvider>
+      </body>
     </html>
   );
 }

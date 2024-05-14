@@ -1,19 +1,12 @@
+import LogoutButton from "@/components/LogoutButton";
 import Image from "next/image";
 
 export default function Page() {
+
     return (
         <div>
             <div className="absolute top-4 right-4">
-                <button
-                    type="button"
-                    className="bg-blueb2bit 
-                             hover:bg-blueb2bithover
-                             text-white font-bold py-2 px-4
-                             rounded focus:outline-none 
-                             focus:shadow-outline"
-                >
-                    Logout
-                </button>
+                <LogoutButton />
             </div>
             <div className="border-2 rounded-xl shadow-xl p-2 w-full max-w-xl">
                 <div className="text-center">
