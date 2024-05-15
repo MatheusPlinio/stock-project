@@ -1,4 +1,4 @@
-import { nextAuthOptions } from "@/app/api/auth/[...nextauth]/route";
+import { nextAuthOptions } from "@/lib/authOptions";
 import axios from "axios";
 import { getServerSession } from "next-auth";
 
