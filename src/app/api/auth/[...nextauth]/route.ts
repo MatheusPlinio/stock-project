@@ -26,20 +26,7 @@ const nextAuthOptions: NextAuthOptions = {
                 const data = await response.json()
 
                 if (data && response.ok) {
-                    return {
-                        id: data.user.id,
-                        name: data.user.name,
-                        email: data.user.email,
-                        is_active: data.user.is_active,
-                        avatar: data.user.avatar,
-                        type: data.user.type,
-                        created: data.user.created,
-                        role: data.user.role,
-                        tokens: {
-                            access: data.tokens.access,
-                            refresh: data.tokens.refresh,
-                        }
-                    }
+                    return data
                 }
                 return null
             },
@@ -51,21 +38,13 @@ const nextAuthOptions: NextAuthOptions = {
     callbacks: {
         async jwt({ token, user }) {
             if (user) {
-                token.access_token = user.tokens.access
-                token.refresh_token = user.tokens.refresh
-                token.user = user
+                token.user = user;
             }
-            return token
+            return token;
         },
         async session({ session, token }) {
-            if (token) {
-                session.user = token.user as typeof session.user
-                session.tokens = {
-                    access: token.access_token!,
-                    refresh: token.refresh_token!
-                }
-            }
-            return session
+            session.user = token.user;
+            return session;
         }
     },
     session: {
