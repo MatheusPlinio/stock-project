@@ -1,7 +1,10 @@
+import FetchDataProfile from "@/app/api/profile/route";
 import LogoutButton from "@/components/LogoutButton";
 import Image from "next/image";
 
-export default function Page() {
+export default async function Page() {
+
+    const data = await FetchDataProfile()
 
     return (
         <div>
@@ -26,7 +29,7 @@ export default function Page() {
                         <span className="font-semibold">Your Name</span>
                     </div>
                     <div className="m-4">
-                        <p className="ml-6">Christine</p>
+                        <p className="ml-6">{data.name}</p>
                     </div>
                 </div>
                 <div className="m-2 w-96">
@@ -34,7 +37,7 @@ export default function Page() {
                         <span className="font-semibold">Your E-mail</span>
                     </div>
                     <div className="m-4">
-                        <p className="ml-6">christine@gmail.com</p>
+                        <p className="ml-6">{data.email}</p>
                     </div>
                 </div>
             </div>
