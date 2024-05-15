@@ -11,7 +11,7 @@ const nextAuthOptions: NextAuthOptions = {
             },
 
             async authorize(credentials, res) {
-                const response = await fetch("https://api.homologation.cliqdrive.com.br/auth/login/", {
+                const response = await fetch(`${process.env.API_AUTH_URL}/auth/login/`, {
                     method: 'POST',
                     headers: {
                         'Accept': 'application/json;version=v1_web',
