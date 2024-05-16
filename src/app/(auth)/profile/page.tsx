@@ -1,11 +1,14 @@
 
-import { FetchDataProfile } from "@/app/api/profile/route";
+
 import LogoutButton from "@/components/LogoutButton";
+import Axios from "@/utils/axios";
 import Image from "next/image";
 
 export default async function Page() {
 
-    const data = await FetchDataProfile()
+    const response = await Axios.get(`${process.env.API_AUTH_URL}/auth/profile/`)
+    
+    const data = response.data
 
     return (
         <div>
