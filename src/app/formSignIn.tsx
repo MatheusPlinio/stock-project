@@ -4,11 +4,13 @@ import { signinSchema, TSigninSchema } from "../types/nextauth/type";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { signIn } from "next-auth/react";
 import { useRouter } from "next/navigation";
+import { useToast } from "@/components/ui/use-toast";
 
 export default function FormSignIn() {
 
     const route = useRouter()
 
+    const { toast } = useToast()
     const {
         register,
         handleSubmit,
@@ -27,6 +29,12 @@ export default function FormSignIn() {
 
         if (result?.ok) {
             route.push('/profile')
+        } else {
+            toast({
+                variant: "destructive",
+                title: "Something Wrong",
+                description: "There was a problem with you email or password"
+            })
         }
     }
 
@@ -48,16 +56,16 @@ export default function FormSignIn() {
                     </label>
                     <input
                         {...register("email", {
-                            required: "Expected a email valid",
+                            required: errors.email?.message,
                         })}
                         id="email"
                         type="text"
                         placeholder="@gmail.com"
                         className="shadow appearance-none
-          border rounded w-full
-          py-2 px-3 text-gray-700
-          leading-tight focus:outline-none
-          focus:shadow-outline"
+                                   border rounded w-full
+                                   py-2 px-3 text-gray-700
+                                   leading-tight focus:outline-none
+                                   focus:shadow-outline"
                     />
                 </div>
                 {errors.email && (
@@ -73,7 +81,7 @@ export default function FormSignIn() {
                     </label>
                     <input
                         {...register("password", {
-                            required: "Expected a password valid in this field"
+                            required: errors.password?.message
                         })}
                         id="password"
                         type="password"
@@ -93,9 +101,9 @@ export default function FormSignIn() {
                         type="submit"
                         disabled={isSubmitting}
                         className="w-full bg-blueb2bit hover:bg-blueb2bithover
-                       text-white font-bold py-2 px-4
-                       rounded focus:outline-none 
-                       focus:shadow-outline"
+                                 text-white font-bold py-2 px-4
+                                   rounded focus:outline-none 
+                                   focus:shadow-outline"
                     >
                         Sign In
                     </button>

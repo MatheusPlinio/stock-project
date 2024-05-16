@@ -9,8 +9,8 @@ describe('Sign In page form validation', () => {
 
         fireEvent.submit(ButtonSignin);
 
-        const EmailMsgValidate = screen.findByText(/email is required/i)
-        const PasswordMsgValidate = screen.findByText(/password is required/i)
+        const EmailMsgValidate = screen.findByText(/Required a valid Email/i)
+        const PasswordMsgValidate = screen.findByText(/Required a min 3 charctere/i)
 
         expect(await EmailMsgValidate).toBeInTheDocument()
         expect(await PasswordMsgValidate).toBeInTheDocument()

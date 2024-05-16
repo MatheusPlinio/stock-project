@@ -16,9 +16,9 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className="flex justify-center items-center min-h-screen">
-
         <NextAuthSessionProvider>
           {children}
+          <Toaster />
         </NextAuthSessionProvider>
       </body>
     </html>

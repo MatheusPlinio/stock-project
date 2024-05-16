@@ -1,4 +1,5 @@
 import FormSignIn from "@/app/formSignIn"
+import { Toaster } from "@/components/ui/toaster"
 import { fireEvent, render, screen, waitFor } from "@testing-library/react"
 import { signIn } from "next-auth/react"
 
@@ -22,17 +23,18 @@ describe('Form Sign In', () => {
     })
 })
 
-describe('Form Sign In Error Handling', () => {
-    it('should display error message on failed login', async () => {
-        (signIn as jest.Mock).mockResolvedValueOnce({ error: 'Invalid credentials' });
+describe("Form Sign In Error Handling", () => {
+    it("should display error message on failed login", async () => {
+        (signIn as jest.Mock).mockResolvedValueOnce({ error: "Invalid credentials" });
 
         render(<FormSignIn />);
-        fireEvent.change(screen.getByLabelText(/email/i), { target: { value: 'user@example.com' } });
-        fireEvent.change(screen.getByLabelText(/password/i), { target: { value: 'password' } });
-        fireEvent.submit(screen.getByRole('button', { name: /Sign In/i }));
+        fireEvent.change(screen.getByLabelText(/email/i), { target: { value: "user@example.com" } });
+        fireEvent.change(screen.getByLabelText(/password/i), { target: { value: "password" } });
+        fireEvent.submit(screen.getByRole("button", { name: /Sign In/i }));
 
         await waitFor(() => {
-            expect(screen.getByText(/invalid credentials/i)).toBeInTheDocument();
-        })
-    })
-})
+            render(<Toaster />)
+            expect(screen.getByText(/There was a problem with you email or password/i)).toBeInTheDocument();
+        });
+    });
+});
