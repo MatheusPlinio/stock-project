@@ -38,6 +38,7 @@ export const nextAuthOptions: NextAuthOptions = {
     },
     callbacks: {
         async jwt({ token, user }) {
+            token: process.env.NEXTAUTH_SECRET
             if (user) {
                 token.user = user;
             }
