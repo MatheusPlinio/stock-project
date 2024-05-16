@@ -5,6 +5,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { signIn } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import { useToast } from "@/components/ui/use-toast";
+import Image from "next/image";
 
 export default function FormSignIn() {
 
@@ -15,7 +16,6 @@ export default function FormSignIn() {
         register,
         handleSubmit,
         formState: { errors, isSubmitting },
-        setError
     } = useForm<TSigninSchema>({
         resolver: zodResolver(signinSchema)
     })
@@ -41,10 +41,15 @@ export default function FormSignIn() {
     return (
         <div className="w-full max-w-md border-2 rounded-3xl shadow-2xl">
             <div
-                className="text-center font-extrabold"
+                className="flex justify-center font-extrabold m-6"
                 style={{ fontSize: "125px" }}
             >
-                <span className="text-blueb2bit">b2b</span><span className="text-yellowb2bit">it</span>
+                <Image
+                    alt="logo"
+                    src="/B2BitLogo.png"
+                    width={275}
+                    height={275}    
+                />
             </div>
             <form onSubmit={handleSubmit(onSubmit)} className="bg-white px-8 pt-6 pb-8 mb-4">
                 <div className="mb-4">

@@ -2,7 +2,7 @@ import Home from "@/app/page"
 import { render, screen } from "@testing-library/react"
 
 
-describe('Login Page', () => {
+describe('Sign In Page', () => {
     it('should render form login', () => {
         render(<Home />)
         const inputEmail = screen.getByLabelText(/email/i)
