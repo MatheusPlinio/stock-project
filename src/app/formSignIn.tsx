@@ -4,16 +4,18 @@ import { signinSchema, TSigninSchema } from "../types/nextauth/type";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { signIn } from "next-auth/react";
 import { useRouter } from "next/navigation";
+import { useToast } from "@/components/ui/use-toast";
+import Image from "next/image";
 
 export default function FormSignIn() {
 
     const route = useRouter()
 
+    const { toast } = useToast()
     const {
         register,
         handleSubmit,
         formState: { errors, isSubmitting },
-        setError
     } = useForm<TSigninSchema>({
         resolver: zodResolver(signinSchema)
     })
@@ -27,16 +29,27 @@ export default function FormSignIn() {
 
         if (result?.ok) {
             route.push('/profile')
+        } else {
+            toast({
+                variant: "destructive",
+                title: "Something Wrong",
+                description: "There was a problem with you email or password"
+            })
         }
     }
 
     return (
         <div className="w-full max-w-md border-2 rounded-3xl shadow-2xl">
             <div
-                className="text-center font-extrabold"
+                className="flex justify-center font-extrabold m-6"
                 style={{ fontSize: "125px" }}
             >
-                <span className="text-blueb2bit">b2b</span><span className="text-yellowb2bit">it</span>
+                <Image
+                    alt="logo"
+                    src="/B2BitLogo.png"
+                    width={275}
+                    height={275}    
+                />
             </div>
             <form onSubmit={handleSubmit(onSubmit)} className="bg-white px-8 pt-6 pb-8 mb-4">
                 <div className="mb-4">
@@ -48,16 +61,16 @@ export default function FormSignIn() {
                     </label>
                     <input
                         {...register("email", {
-                            required: "Expected a email valid",
+                            required: errors.email?.message,
                         })}
                         id="email"
                         type="text"
                         placeholder="@gmail.com"
                         className="shadow appearance-none
-          border rounded w-full
-          py-2 px-3 text-gray-700
-          leading-tight focus:outline-none
-          focus:shadow-outline"
+                                   border rounded w-full
+                                   py-2 px-3 text-gray-700
+                                   leading-tight focus:outline-none
+                                   focus:shadow-outline"
                     />
                 </div>
                 {errors.email && (
@@ -73,7 +86,7 @@ export default function FormSignIn() {
                     </label>
                     <input
                         {...register("password", {
-                            required: "Expected a password valid in this field"
+                            required: errors.password?.message
                         })}
                         id="password"
                         type="password"
@@ -93,9 +106,9 @@ export default function FormSignIn() {
                         type="submit"
                         disabled={isSubmitting}
                         className="w-full bg-blueb2bit hover:bg-blueb2bithover
-                       text-white font-bold py-2 px-4
-                       rounded focus:outline-none 
-                       focus:shadow-outline"
+                                 text-white font-bold py-2 px-4
+                                   rounded focus:outline-none 
+                                   focus:shadow-outline"
                     >
                         Sign In
                     </button>
