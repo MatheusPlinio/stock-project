@@ -1,4 +1,5 @@
-import FetchDataProfile from "@/app/api/profile/route";
+
+import { FetchDataProfile } from "@/app/api/profile/route";
 import LogoutButton from "@/components/LogoutButton";
 import Image from "next/image";
 
