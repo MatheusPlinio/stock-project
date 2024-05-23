@@ -9,7 +9,47 @@ services:
       - .:/home/node/app
     extra_hosts:
       - "host.docker.internal:host-gateway"
+  db_mysql:
+    image: mysql
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: default
+      MYSQL_USER: dev
+      MYSQL_PASSWORD: 123456
+    volumes:
+      - db-mysql:/var/lib/mysql
+    ports:
+      - "3306:3306"
 
+  # db_postgresql:
+  #   image: postgres
+  #   restart: always
+  #   environment:
+  #     POSTGRES_USER: user
+  #     POSTGRES_PASSWORD: password
+  #     POSTGRES_DB: default
+  #   volumes:
+  #     - db-postgres:/var/lib/postgresql/data
+  #   ports:
+  #     - "5432:5432"
+
+  # db_mongo:
+  #   build: ./mongo_rs
+  #   restart: always
+  #   environment:
+  #     MONGO_INITDB_ROOT_PASSWORD: root
+  #     MONGO_REPLICA_HOST: db_mongo
+  #     # MONGODB_REPLICA_SET_MODE: primary
+  #     # MONGO_REPLICA_SET_KEY: 123456
+  #     MONGODB_DATABASE: default
+  #   volumes:
+  #     - ./mongodb_data:/bitnami/mongodb
+
+volumes:
+  db-mysql:
+  # db-postgres:
+  # mongodb_data:
 networks:
   my-network:
     external: true

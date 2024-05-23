@@ -1,9 +1,13 @@
-import FormSignIn from "./formSignIn";
+import HardSkills from "@/components/HardSkills";
+import NavBar from "@/components/NavBar";
+import Start from "@/components/Start";
 
 export default function Home() {
   return (
     <div>
-      <FormSignIn />
+      <NavBar />
+      <Start />
+      <HardSkills />
     </div>
   )
 }
