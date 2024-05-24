@@ -4,7 +4,7 @@ import TechSkill from "./TechSkill";
 export default function HardSkills() {
     return (
         <div className="flex flex-col text-center">
-            <div className="m-2 bg-gray-800 w-2/4 p-5 rounded-e-full">
+            <div className="m-2 bg-gray-700 w-2/4 p-5 rounded-e-full">
                 <h1 className="text-3xl font-semibold text-white text-end m-2">My Hard Skills</h1>
             </div>
             <div className="flex justify-center">
