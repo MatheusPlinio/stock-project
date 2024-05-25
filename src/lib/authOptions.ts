@@ -1,5 +1,6 @@
 import { NextAuthOptions } from "next-auth"
 import CredentialsProvider from "next-auth/providers/credentials"
+import GitHubProvider from "next-auth/providers/github";
 
 export const nextAuthOptions: NextAuthOptions = {
     providers: [
@@ -30,6 +31,10 @@ export const nextAuthOptions: NextAuthOptions = {
                 }
                 return null
             },
+        }),
+        GitHubProvider({
+            clientId: process.env.GITHUB_ID as string,
+            clientSecret: process.env.GITHUB_SECRET as string
         })
     ],
     secret: process.env.NEXTAUTH_SECRET,
@@ -47,6 +52,9 @@ export const nextAuthOptions: NextAuthOptions = {
         async session({ session, token }) {
             session.user = token.user;
             return session;
+        },
+        async redirect({ baseUrl, url }) {
+            return `${baseUrl}/profile`
         }
     },
     session: {
