@@ -7,7 +7,7 @@ const config = {
     './components/**/*.{ts,tsx}',
     './app/**/*.{ts,tsx}',
     './src/**/*.{ts,tsx}',
-  ],
+	],
   prefix: "",
   theme: {
     container: {
@@ -18,12 +18,6 @@ const config = {
       },
     },
     extend: {
-      width: {
-        '4/5': '80%'
-      },
-      backgroundImage: {
-        'indigo-gradient': 'linear-gradient(to bottom, #4f46e5, #655ceb, #7971f0, #8c85f5, #9f9af9);'
-      },
       colors: {
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
@@ -73,20 +67,10 @@ const config = {
           from: { height: "var(--radix-accordion-content-height)" },
           to: { height: "0" },
         },
-        typing: {
-          '0%': { width: '0ch' },
-          '100%': { width: '100ch' }
-        },
-        blink: {
-          '0%, 100%': { borderColor: 'transparent' },
-          '50%': { borderColor: 'white' },
-        },
       },
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
-        typing: 'typing 10s steps(100, end) forwards', // Ajuste o tempo e passos conforme necessário
-        blink: 'blink 0.75s step-end infinite'
       },
     },
   },
