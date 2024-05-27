@@ -38,8 +38,6 @@ const Sidebar: React.FC = () => {
                             icon={< User size={20} />}
                             text="Dashboard"
                             href="/dashboard"
-                            alert
-                            active
                         />
                     </ul>
                 </SidebarContext.Provider>
@@ -84,7 +82,9 @@ const SidebarItem: React.FC<TSidebarItem> = ({ icon, text, href = "#", active, a
             <li
                 className={`
                 relative flex items-center py-2 px-3 my-1
+                bg-gray-200
                 font-medium rounded-md cursor-pointer
+                hover:bg-indigo-500 hover:text-white
                 transition-colors group
                 ${active ? "bg-gradient-to-tr from-indigo-200 to-indigo-100 text-indigo-800" : "hover:bg-indigo-50 text-gray-600"}
             `}
