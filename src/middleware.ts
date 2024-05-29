@@ -6,7 +6,11 @@ export async function middleware(req: NextRequest) {
 
     const { pathname } = req.nextUrl;
 
-    const protectedRoutes = ["/profile",];
+    const protectedRoutes = [
+        "/profile",
+        "/dashboard",
+        "/category"
+    ];
 
     if (token || pathname.includes("/api/auth") || pathname === "/") {
         return NextResponse.next()
@@ -21,5 +25,9 @@ export async function middleware(req: NextRequest) {
 }
 
 export const config = {
-    matcher: ["/profile"]
+    matcher: [
+        "/profile",
+        "/dashboard",
+        "/category"
+    ]
 }
