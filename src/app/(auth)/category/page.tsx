@@ -1,6 +1,7 @@
-import { DataTable } from "@/components/DataTables";
-import { columns } from "./(tables)/Columns";
+import { DataTable } from "@/components/category/DataTables";
+
 import { PrismaClient } from "@prisma/client"
+import { columns } from "./(tables)/Columns";
 
 export const revalidate = 0
 

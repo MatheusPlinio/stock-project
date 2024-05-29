@@ -40,6 +40,11 @@ const Sidebar: React.FC = () => {
                             text="Category"
                             href="/category"
                         />
+                        <SidebarItem
+                            icon={<Grid size={20} />}
+                            text="Product"
+                            href="/product"
+                        />
                     </ul>
                 </SidebarContext.Provider>
 
