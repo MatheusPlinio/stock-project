@@ -53,9 +53,9 @@ export const nextAuthOptions: NextAuthOptions = {
             session.user = token.user;
             return session;
         },
-        async redirect({ baseUrl, url }) {
-            return `${baseUrl}/profile`
-        }
+        // async redirect({ baseUrl, url }) {
+        //     return `${baseUrl}/profile`
+        // }
     },
     session: {
         strategy: "jwt"
