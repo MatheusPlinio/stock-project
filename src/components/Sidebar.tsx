@@ -1,5 +1,5 @@
 'use client'
-import { MoreVertical, ChevronLast, ChevronFirst, LayoutDashboard, User } from "lucide-react";
+import { MoreVertical, ChevronLast, ChevronFirst, LayoutDashboard, User, Grid } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import React, { useContext, createContext, useState, ReactNode } from "react";
@@ -7,15 +7,11 @@ import SettingProfile from "./SettingsProfile";
 
 const SidebarContext = createContext({ expanded: true });
 
-// interface TSidebar {
-//     children: ReactNode;
-// }
-
 const Sidebar: React.FC = () => {
     const [expanded, setExpanded] = useState(true);
 
     return (
-        <aside className={`h-screen transition-all flex ${expanded ? "w-80" : "w-20"}`
+        <aside className={`h-screen transition-all flex ${expanded ? "w-80" : "w-16"}`
         }>
             <nav className="h-full flex flex-col bg-white border-r shadow-sm">
                 <div className="p-4 pb-2 flex justify-between items-center">
@@ -38,6 +34,11 @@ const Sidebar: React.FC = () => {
                             icon={< User size={20} />}
                             text="Dashboard"
                             href="/dashboard"
+                        />
+                        <SidebarItem
+                            icon={<Grid size={20} />}
+                            text="Category"
+                            href="/category"
                         />
                     </ul>
                 </SidebarContext.Provider>
