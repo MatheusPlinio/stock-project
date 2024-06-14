@@ -1,0 +1,7 @@
+Atributo possui ID UNIQUE - product_id será referencia a qual produto o atributo pertence
+
+
+ValueAttribute possui mais de um attribute_id e mais de um value para o mesmo attribute_id, o 
+
+
+

@@ -4,8 +4,8 @@ generator client {
 
 datasource db {
   provider = "postgresql"
-  url = env("POSTGRES_PRISMA_URL") // uses connection pooling
-  directUrl = env("POSTGRES_URL_NON_POOLING") // uses a direct connection
+  url      = env("POSTGRES_PRISMA_URL") // uses connection pooling
+  // directUrl = env("POSTGRES_URL_NON_POOLING") // uses a direct connection
 }
 
 model Category {
@@ -18,18 +18,41 @@ model Category {
 }
 
 model Product {
-  id_or_serial_or_code String   @id
-  category_id          String
-  created_at           DateTime
-  updated_at           DateTime
-  category             Category @relation(fields: [category_id], references: [id])
-  batch                Batch[]
+  product_id  String      @id @default(cuid())
+  category_id String
+  name        String
+  created_at  DateTime
+  updated_at  DateTime
+  category    Category    @relation(fields: [category_id], references: [id])
+  attribute   Attribute[]
+}
+
+model Attribute {
+  attribute_id    String           @id @default(uuid())
+  product_id      String
+  name            String
+  type            String
+  product         Product          @relation(fields: [product_id], references: [product_id])
+  value_attribute ValueAttribute[]
+}
+
+model ValueAttribute {
+  id           String    @id @default(uuid())
+  attribute_id String
+  value        String
+  attribute    Attribute @relation(fields: [attribute_id], references: [attribute_id])
+}
+
+model StockItem {
+  id_code_or_serial String  @id
+  product_id        String  @unique
+  Batch             Batch[]
 }
 
 model Batch {
-  id               String   @id @default(cuid())
-  product_id       String
-  fabrication_date DateTime
-  expiration_date  DateTime
-  products         Product  @relation(fields: [product_id], references: [id_or_serial_or_code])
+  id                String    @id @default(cuid())
+  id_code_or_serial String
+  fabrication_date  DateTime
+  expiration_date   DateTime
+  stock_item        StockItem @relation(fields: [id_code_or_serial], references: [id_code_or_serial])
 }
