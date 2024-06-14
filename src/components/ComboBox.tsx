@@ -1,8 +1,7 @@
-import * as React from "react";
-import { Check, ChevronsUpDown } from "lucide-react";
-
-import { cn } from "@/lib/utils";
-import { Button } from "@/components/ui/button";
+import * as React from "react"
+import { Check, ChevronsUpDown } from "lucide-react"
+import { cn } from "@/lib/utils"
+import { Button } from "@/components/ui/button"
 import {
   Command,
   CommandEmpty,
@@ -10,32 +9,26 @@ import {
   CommandInput,
   CommandItem,
   CommandList,
-} from "@/components/ui/command";
+} from "@/components/ui/command"
 import {
   Popover,
   PopoverContent,
   PopoverTrigger,
-} from "@/components/ui/popover";
+} from "@/components/ui/popover"
 
 interface Framework {
-  id: string;
-  name: string;
+  id: string
+  name: string
 }
 
 interface ComboBoxProps {
-  frameworks: Framework[];
+  frameworks: Framework[]
+  value: string
+  onSelect: (value: string) => void
 }
 
-export function Combobox({ frameworks }: ComboBoxProps) {
-  const [open, setOpen] = React.useState(false);
-  const [value, setValue] = React.useState("");
-
-  const selectedFramework = frameworks.find((framework) => framework.id === value);
-
-  const handleChange = (currentValue: string) => {
-    setValue(currentValue === value ? "" : currentValue);
-    setOpen(false);
-  };
+export const Combobox = React.forwardRef<HTMLDivElement, ComboBoxProps>(({ frameworks, value, onSelect }, ref) => {
+  const [open, setOpen] = React.useState(false)
 
   return (
     <Popover open={open} onOpenChange={setOpen}>
@@ -46,11 +39,13 @@ export function Combobox({ frameworks }: ComboBoxProps) {
           aria-expanded={open}
           className="w-[200px] justify-between"
         >
-          {selectedFramework ? selectedFramework.name : "Select framework..."}
+          {value
+            ? frameworks.find((framework) => framework.id === value)?.name
+            : "Select framework..."}
           <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
         </Button>
       </PopoverTrigger>
-      <PopoverContent className="w-[200px] p-0">
+      <PopoverContent className="w-[200px] p-0" ref={ref}>
         <Command>
           <CommandInput placeholder="Search framework..." />
           <CommandList>
@@ -60,7 +55,10 @@ export function Combobox({ frameworks }: ComboBoxProps) {
                 <CommandItem
                   key={framework.id}
                   value={framework.id}
-                  onSelect={handleChange}
+                  onSelect={() => {
+                    onSelect(framework.id)
+                    setOpen(false)
+                  }}
                 >
                   <Check
                     className={cn(
@@ -76,5 +74,7 @@ export function Combobox({ frameworks }: ComboBoxProps) {
         </Command>
       </PopoverContent>
     </Popover>
-  );
-}
+  )
+})
+
+Combobox.displayName = "Combobox"

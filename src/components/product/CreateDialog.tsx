@@ -12,15 +12,19 @@ import { TCreateProductSchema, createProductSchema } from "@/types/product/type"
 import { Combobox } from "../ComboBox"
 
 export default function CreateDialog() {
+
     const {
         register,
         handleSubmit,
+        watch,
         formState: { errors, isSubmitting },
-        setError
+        setError,
+        setValue
     } = useForm<TCreateProductSchema>({
         resolver: zodResolver(createProductSchema)
     })
 
+    const selectedCategory = watch("category")
     const router = useRouter()
 
     const [open, setOpen] = useState(false)
@@ -71,7 +75,7 @@ export default function CreateDialog() {
             } else if (errors.category) {
                 setError("category", {
                     type: "server",
-                    message: errors.category_name
+                    message: errors.category
                 })
             }
             setOpen(false)
@@ -89,7 +93,7 @@ export default function CreateDialog() {
             <DialogContent className="sm:max-w-[425px]">
                 <form onSubmit={handleSubmit(onSubmit)}>
                     <DialogHeader>
-                        <DialogTitle className="text-indigo-500">Create Category</DialogTitle>
+                        <DialogTitle className="text-indigo-500">Register Product</DialogTitle>
                     </DialogHeader>
                     <div className="grid gap-4 py-4">
                         <div className="grid grid-cols-4 items-center gap-4">
@@ -116,12 +120,11 @@ export default function CreateDialog() {
                             <Label htmlFor="description" className="text-right text-md text-indigo-500">
                                 Category
                             </Label>
-                            {Array.isArray(frameworks) && frameworks.length > 0 ? (
-                                <Combobox frameworks={frameworks} />
-                            ) : (
-                                <p className="col-span-3 text-red-500">Loading Categorys...</p>
-                            )}
-                            {/* <
+                            {/* {Array.isArray(frameworks) && frameworks.length > 0 ? ( */}
+                            <Combobox
+                                frameworks={frameworks}
+                                value={selectedCategory}
+                                onSelect={(value) => setValue('category', value)}
                                 {...register("category", {
                                     required: "Writting a description",
                                     minLength: {
@@ -129,10 +132,10 @@ export default function CreateDialog() {
                                         message: "create a description "
                                     }
                                 })}
-                                id="description"
-                                placeholder="Writting here a description"
-                                className="col-span-3 border-none"
-                            /> */}
+                            />
+                            {/* ) : ( */}
+                            {/* <p className="col-span-3 text-red-500">Loading Categories...</p> */}
+                            {/* )} */}
                             {errors.category && (
                                 <p className="text-red-500">{`${errors.category?.message}`}</p>
                             )}
