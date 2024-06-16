@@ -53,7 +53,7 @@ export default function CreateDialog() {
         const payload = {
             name: data.name,
             category: data.category,
-            attributes: data.attributes ? JSON.stringify(data.attributes) : undefined
+            attributes: data.attributes
         };
 
         const response = await fetch("/api/product/store", {
