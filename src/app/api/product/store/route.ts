@@ -16,10 +16,17 @@ export async function POST(request: NextRequest) {
 
     const prisma = new PrismaClient()
 
-    const data = await prisma.product.create({
+    const productCreate = await prisma.product.create({
         data: {
             name: result.data?.name as string,
             category_id: result.data?.category as string,
+        }
+    })
+
+    const attributeCreate = await prisma.attribute.create({
+        data: {
+            product_id: productCreate.product_id,
+            json: result.data?.attributes
         }
     })
 

@@ -28,11 +28,10 @@ model Product {
 }
 
 model Attribute {
-  attribute_id    String           @id @default(uuid())
-  product_id      String
-  json            Json?
-  type            String
-  product         Product          @relation(fields: [product_id], references: [product_id])
+  attribute_id String  @id @default(uuid())
+  product_id   String
+  json         Json?
+  product      Product @relation(fields: [product_id], references: [product_id])
 }
 
 model StockItem {

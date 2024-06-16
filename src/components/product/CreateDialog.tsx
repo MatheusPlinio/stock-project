@@ -50,9 +50,15 @@ export default function CreateDialog() {
     }, []);
 
     async function onSubmit(data: TCreateProductSchema) {
+        const payload = {
+            name: data.name,
+            category: data.category,
+            attributes: data.attributes ? JSON.stringify(data.attributes) : undefined
+        };
+
         const response = await fetch("/api/product/store", {
             method: "POST",
-            body: JSON.stringify(data),
+            body: JSON.stringify(payload),
             headers: {
                 "Content-Type": "application/json"
             }
