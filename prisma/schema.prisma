@@ -1,0 +1,51 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider  = "postgresql"
+  url       = env("POSTGRES_PRISMA_URL")
+  directUrl = env("POSTGRES_URL_NON_POOLING")
+}
+
+model Category {
+  id          String    @id @default(cuid())
+  name        String
+  description String
+  created_at  DateTime  @default(now())
+  updated_at  DateTime  @updatedAt
+  products    Product[]
+}
+
+model Product {
+  product_id  String      @id @default(cuid())
+  category_id String
+  name        String
+  created_at  DateTime    @default(now())
+  updated_at  DateTime    @default(now())
+  category    Category    @relation(fields: [category_id], references: [id])
+  attribute   Attribute[]
+  stock_item  StockItem[]
+}
+
+model Attribute {
+  attribute_id String  @id @default(uuid())
+  product_id   String
+  json         Json?
+  product      Product @relation(fields: [product_id], references: [product_id], onDelete: Cascade)
+}
+
+model StockItem {
+  id_code_or_serial String  @id
+  product_id        String
+  product           Product @relation(fields: [product_id], references: [product_id])
+  Batch             Batch[]
+}
+
+model Batch {
+  id                String    @id @default(cuid())
+  id_code_or_serial String
+  fabrication_date  DateTime
+  expiration_date   DateTime
+  stock_item        StockItem @relation(fields: [id_code_or_serial], references: [id_code_or_serial])
+}
