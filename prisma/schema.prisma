@@ -30,17 +30,9 @@ model Product {
 model Attribute {
   attribute_id    String           @id @default(uuid())
   product_id      String
-  name            String
+  json            Json?
   type            String
   product         Product          @relation(fields: [product_id], references: [product_id])
-  value_attribute ValueAttribute[]
-}
-
-model ValueAttribute {
-  id           String    @id @default(uuid())
-  attribute_id String
-  value        String
-  attribute    Attribute @relation(fields: [attribute_id], references: [attribute_id])
 }
 
 model StockItem {
