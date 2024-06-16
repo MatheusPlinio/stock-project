@@ -25,18 +25,20 @@ model Product {
   updated_at  DateTime    @default(now())
   category    Category    @relation(fields: [category_id], references: [id])
   attribute   Attribute[]
+  stock_item  StockItem[]
 }
 
 model Attribute {
   attribute_id String  @id @default(uuid())
   product_id   String
   json         Json?
-  product      Product @relation(fields: [product_id], references: [product_id])
+  product      Product @relation(fields: [product_id], references: [product_id], onDelete: Cascade)
 }
 
 model StockItem {
   id_code_or_serial String  @id
-  product_id        String  @unique
+  product_id        String
+  product           Product @relation(fields: [product_id], references: [product_id])
   Batch             Batch[]
 }
 

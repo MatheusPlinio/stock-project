@@ -34,20 +34,22 @@ export const columns: ColumnDef<Category>[] = [
             const category = row.original
 
             return (
-                <DropdownMenu>
-                    <DropdownMenuTrigger asChild className='cursor-pointer'>
-                        <MoreHorizontal />
-                    </DropdownMenuTrigger>
-                    <DropdownMenuContent>
-                        <DropdownMenuLabel className='flex justify-center'>Actions</DropdownMenuLabel>
-                        <div>
-                            <UpdateDialog category={category} />
-                        </div>
-                        <div>
-                            <DeleteAlert id={category.id} />
-                        </div>
-                    </DropdownMenuContent>
-                </DropdownMenu>
+                <div className='flex justify-center'>
+                    <DropdownMenu>
+                        <DropdownMenuTrigger asChild className='cursor-pointer'>
+                            <MoreHorizontal />
+                        </DropdownMenuTrigger>
+                        <DropdownMenuContent>
+                            <DropdownMenuLabel className='flex justify-center'>Actions</DropdownMenuLabel>
+                            <div>
+                                <UpdateDialog category={category} />
+                            </div>
+                            <div>
+                                <DeleteAlert id={category.id} />
+                            </div>
+                        </DropdownMenuContent>
+                    </DropdownMenu>
+                </div>
             )
         }
     }

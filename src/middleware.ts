@@ -9,7 +9,8 @@ export async function middleware(req: NextRequest) {
     const protectedRoutes = [
         "/profile",
         "/dashboard",
-        "/category"
+        "/category",
+        "/product"
     ];
 
     if (token || pathname.includes("/api/auth") || pathname === "/") {
@@ -28,6 +29,7 @@ export const config = {
     matcher: [
         "/profile",
         "/dashboard",
-        "/category"
+        "/category",
+        "/product"
     ]
 }

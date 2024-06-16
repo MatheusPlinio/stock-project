@@ -9,7 +9,8 @@ export default async function page() {
     const prisma = new PrismaClient()
     const data = await prisma.product.findMany({
         include: {
-            category: true
+            category: true,
+            stock_item: true
         }
     })
 

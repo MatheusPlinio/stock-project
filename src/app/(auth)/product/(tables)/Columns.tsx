@@ -1,7 +1,12 @@
 'use client'
 
+import UpdateDialog from '@/components/category/UpdateDialog'
 import CreateDialog from '@/components/product/CreateDialog'
+import DeleteAlert from '@/components/product/DeleteDialog'
+import { DropdownMenu, DropdownMenuContent, DropdownMenuLabel, DropdownMenuTrigger } from '@/components/ui/dropdown-menu'
+import { StockItem } from '@prisma/client'
 import { ColumnDef } from '@tanstack/react-table'
+import { MoreHorizontal } from 'lucide-react'
 
 interface Product {
     product_id: string
@@ -9,7 +14,8 @@ interface Product {
     category: {
         id: string
         name: string
-    }
+    },
+    stock_item: StockItem[]
 }
 
 export const columns: ColumnDef<Product>[] = [
@@ -22,31 +28,38 @@ export const columns: ColumnDef<Product>[] = [
         header: 'Category'
     },
     {
+        id: 'stock',
+        accessorKey: 'stock_item.length',
+        header: 'Stock'
+    },
+    {
         id: 'create',
         header: ({ table }) => (
             <div className="flex justify-center">
                 <CreateDialog />
             </div>
         ),
-        // cell: ({ row }) => {
-        //     const category = row.original
+        cell: ({ row }) => {
+            const product = row.original
 
-        //     return (
-        //         <DropdownMenu>
-        //             <DropdownMenuTrigger asChild className='cursor-pointer'>
-        //                 <MoreHorizontal />
-        //             </DropdownMenuTrigger>
-        //             <DropdownMenuContent>
-        //                 <DropdownMenuLabel className='flex justify-center'>Actions</DropdownMenuLabel>
-        //                 <div>
-        //                     <UpdateDialog category={category} />
-        //                 </div>
-        //                 <div>
-        //                     <DeleteAlert id={category.id} />
-        //                 </div>
-        //             </DropdownMenuContent>
-        //         </DropdownMenu>
-        //     )
-        // }
+            return (
+                <div className='flex justify-center'>
+                    <DropdownMenu>
+                        <DropdownMenuTrigger asChild className='cursor-pointer'>
+                            <MoreHorizontal />
+                        </DropdownMenuTrigger>
+                        <DropdownMenuContent>
+                            <DropdownMenuLabel className='flex justify-center'>Actions</DropdownMenuLabel>
+                            <div>
+                                {/* <UpdateDialog category={product} /> */}
+                            </div>
+                            <div>
+                                <DeleteAlert id={product.product_id} />
+                            </div>
+                        </DropdownMenuContent>
+                    </DropdownMenu>
+                </div>
+            )
+        }
     }
 ]
