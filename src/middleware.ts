@@ -10,7 +10,8 @@ export async function middleware(req: NextRequest) {
         "/profile",
         "/dashboard",
         "/category",
-        "/product"
+        "/product",
+        "/stock"
     ];
 
     if (token || pathname.includes("/api/auth") || pathname === "/") {
@@ -30,6 +31,7 @@ export const config = {
         "/profile",
         "/dashboard",
         "/category",
-        "/product"
+        "/product",
+        "/stock"
     ]
 }

@@ -1,5 +1,5 @@
 'use client'
-import { MoreVertical, ChevronLast, ChevronFirst, User, Grid, PackageSearch } from "lucide-react";
+import { MoreVertical, ChevronLast, ChevronFirst, User, Grid, PackageSearch, Box } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import React, { useContext, createContext, useState, ReactNode } from "react";
@@ -44,6 +44,11 @@ const Sidebar: React.FC = () => {
                             icon={<PackageSearch size={20} />}
                             text="Product"
                             href="/product"
+                        />
+                        <SidebarItem
+                            icon={<Box size={20} />}
+                            text="Stock"
+                            href="/stock"
                         />
                     </ul>
                 </SidebarContext.Provider>
