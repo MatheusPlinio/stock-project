@@ -1,7 +1,6 @@
 'use client'
 
 import DeleteAlert from '@/components/product/DeleteDialog'
-import CreateDialog from '@/components/stock/CreateDialog'
 import { DropdownMenu, DropdownMenuContent, DropdownMenuLabel, DropdownMenuTrigger } from '@/components/ui/dropdown-menu'
 import { Category, Product, StockItem } from '@prisma/client'
 import { ColumnDef } from '@tanstack/react-table'
@@ -17,7 +16,7 @@ interface StockProps extends StockItem {
 
 export const columns: ColumnDef<StockProps>[] = [
     {
-        accessorKey: 'id_code_or_serial',
+        accessorKey: 'barcode',
         header: 'Barcode'
     },
     {
@@ -29,12 +28,7 @@ export const columns: ColumnDef<StockProps>[] = [
         header: 'Category'
     },
     {
-        id: 'create',
-        header: ({ table }) => (
-            <div className="flex justify-center">
-                <CreateDialog />
-            </div>
-        ),
+        id: 'options',
         cell: ({ row }) => {
             const product = row.original
 
