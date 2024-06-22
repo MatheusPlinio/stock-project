@@ -5,16 +5,21 @@ import { Toaster } from "@/components/ui/toaster";
 import Head from "next/head";
 import Sidebar from "@/components/Sidebar";
 import Header from "@/components/Header";
+import { getServerSession } from "next-auth";
+import { nextAuthOptions } from "@/lib/authOptions";
 
 export const metadata: Metadata = {
   title: "Stock",
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+
+  const session = await getServerSession(nextAuthOptions)
+
   return (
     <html lang="en">
       <Head>
@@ -25,7 +30,7 @@ export default function RootLayout({
       <body className="">
         <NextAuthSessionProvider>
           <div className="flex flex-col h-screen">
-            <Header />
+            <Header session={session} />
             <div className="flex justify-between flex-1 pt-16">
               <Sidebar />
               {children}
