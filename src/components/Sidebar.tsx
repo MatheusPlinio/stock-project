@@ -1,9 +1,8 @@
 'use client'
-import { MoreVertical, ChevronLast, ChevronFirst, User, Grid, PackageSearch, Box } from "lucide-react";
-import Image from "next/image";
+import { ChevronLast, ChevronFirst, User } from "lucide-react";
 import Link from "next/link";
 import React, { useContext, createContext, useState, ReactNode } from "react";
-import SettingProfile from "./SettingsProfile";
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "./ui/accordion";
 
 const SidebarContext = createContext({ expanded: true });
 
@@ -11,8 +10,7 @@ const Sidebar: React.FC = () => {
     const [expanded, setExpanded] = useState(true);
 
     return (
-        <aside className={`h-screen transition-all flex ${expanded ? "w-80" : "w-16"}`
-        }>
+        <aside className={`transition-all flex ${expanded ? "w-52" : "w-16"}`}>
             <nav className="h-full flex flex-col bg-white border-r shadow-sm">
                 <div className="p-4 pb-2 flex justify-between items-center">
                     <img
@@ -30,50 +28,41 @@ const Sidebar: React.FC = () => {
 
                 <SidebarContext.Provider value={{ expanded }}>
                     <ul className="flex-1 px-3">
-                        <SidebarItem
-                            icon={< User size={20} />}
-                            text="Dashboard"
-                            href="/dashboard"
-                        />
-                        <SidebarItem
-                            icon={<Grid size={20} />}
-                            text="Category"
-                            href="/category"
-                        />
-                        <SidebarItem
-                            icon={<PackageSearch size={20} />}
-                            text="Product"
-                            href="/product"
-                        />
-                        <SidebarItem
-                            icon={<Box size={20} />}
-                            text="Stock"
-                            href="/stock"
-                        />
+                        {expanded && (
+                            <Accordion type="single" collapsible defaultValue="item-1">
+                                <AccordionItem value="item-1">
+                                    <AccordionTrigger className="w-28 no-underline hover:no-underline flex justify-center">IGaming</AccordionTrigger>
+                                    <AccordionContent>
+                                        <SidebarItem
+                                            icon={<User size={20} />}
+                                            text="Loremlapsu"
+                                            href="#"
+                                        />
+                                        <SidebarItem
+                                            icon={<User size={20} />}
+                                            text="Loremlapsu"
+                                            href="#"
+                                        />
+                                        <SidebarItem
+                                            icon={<User size={20} />}
+                                            text="Loremlapsu"
+                                            href="#"
+                                        />
+                                    </AccordionContent>
+                                </AccordionItem>
+                            </Accordion>
+                        )}
+                        {!expanded && (
+                            <SidebarItem
+                                icon={<User size={20} />}
+                                text="Dashboard"
+                                href="/dashboard"
+                            />
+                        )}
                     </ul>
                 </SidebarContext.Provider>
-
-                <div className="border-t flex p-3">
-                    <Link href="/profile">
-                        <Image
-                            src="/avatar.svg"
-                            alt=""
-                            width={50}
-                            height={50}
-                        />
-                    </Link>
-                    <div className={`flex justify-between items-center overflow-hidden transition-all ${expanded ? "w-52 ml-3" : "w-0"}`}>
-                        <div className="leading-4">
-                            <h4 className="font-semibold">John Doe</h4>
-                            <span className="text-xs text-gray-600">johndoe@gmail.com</span>
-                        </div>
-                        <div>
-                            <SettingProfile />
-                        </div>
-                    </div>
-                </div>
             </nav>
-        </aside >
+        </aside>
     );
 };
 
@@ -93,15 +82,15 @@ const SidebarItem: React.FC<TSidebarItem> = ({ icon, text, href = "#", active, a
             <li
                 className={`
                 relative flex items-center py-2 px-3 my-1
-                bg-gray-200
+                bg-transparent
                 font-medium rounded-md cursor-pointer
-                hover:bg-indigo-500 hover:text-white
+                hover:text-gray-600
                 transition-colors group
-                ${active ? "bg-gradient-to-tr from-indigo-200 to-indigo-100 text-indigo-800" : "hover:bg-indigo-50 text-gray-600"}
+                ${active ? "bg-gradient-to-tr from-indigo-200 to-indigo-100 text-indigo-800" : "hover:bg-indigo-50 text-gray-400"}
             `}
             >
                 {icon}
-                <span className={`overflow-hidden transition-all ${expanded ? "w-52 ml-3" : "w-0"}`}>
+                <span className={`overflow-hidden transition-all ${expanded ? "w-28 ml-3" : "w-0"}`}>
                     {text}
                 </span>
                 {alert && (
@@ -110,11 +99,11 @@ const SidebarItem: React.FC<TSidebarItem> = ({ icon, text, href = "#", active, a
                 {!expanded && (
                     <div
                         className={`
-                absolute left-full rounded-md px-2 py-1 ml-6
-                bg-indigo-100 text-indigo-800 text-sm
-                invisible opacity-20 -translate-x-3 transition-all
-                group-hover:visible group-hover:opacity-100 group-hover:translate-x-0
-                `}
+                            absolute left-full rounded-md px-2 py-1 ml-6
+                            bg-indigo-100 text-indigo-800 text-sm
+                            invisible opacity-20 -translate-x-3 transition-all
+                            group-hover:visible group-hover:opacity-100 group-hover:translate-x-0
+                        `}
                     >
                         {text}
                     </div>

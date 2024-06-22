@@ -6,32 +6,32 @@ export async function middleware(req: NextRequest) {
 
     const { pathname } = req.nextUrl;
 
-    const protectedRoutes = [
-        "/profile",
-        "/dashboard",
-        "/category",
-        "/product",
-        "/stock"
-    ];
+    // const protectedRoutes = [
+        // "/profile",
+        // "/dashboard",
+        // "/category",
+        // "/product",
+        // "/stock"
+    // ];
 
     if (token || pathname.includes("/api/auth") || pathname === "/") {
         return NextResponse.next()
     }
 
-    if (protectedRoutes.includes(pathname) && !token) {
-        const url = new URL("/", req.url)
-        return NextResponse.redirect(url);
-    }
+    // if (protectedRoutes.includes(pathname) && !token) {
+        // const url = new URL("/", req.url)
+        // return NextResponse.redirect(url);
+    // }
 
     return NextResponse.next();
 }
 
 export const config = {
     matcher: [
-        "/profile",
-        "/dashboard",
-        "/category",
-        "/product",
-        "/stock"
+        // "/profile",
+        // "/dashboard",
+        // "/category",
+        // "/product",
+        // "/stock"
     ]
 }

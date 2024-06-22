@@ -3,6 +3,8 @@ import "./globals.css";
 import NextAuthSessionProvider from "@/providers/sessionProvider";
 import { Toaster } from "@/components/ui/toaster";
 import Head from "next/head";
+import Sidebar from "@/components/Sidebar";
+import Header from "@/components/Header";
 
 export const metadata: Metadata = {
   title: "Stock",
@@ -22,10 +24,16 @@ export default function RootLayout({
       </Head>
       <body className="">
         <NextAuthSessionProvider>
-          {children}
-          <Toaster />
+          <div className="flex flex-col h-screen">
+            <Header />
+            <div className="flex justify-between flex-1 pt-16">
+              <Sidebar />
+              {children}
+              <Toaster />
+            </div>
+          </div>
         </NextAuthSessionProvider>
       </body>
-    </html>
+    </html >
   );
 }
