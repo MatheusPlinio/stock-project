@@ -1,8 +1,13 @@
-import React from 'react';
+import { Session } from 'next-auth';
 import AuthDialog from './auth/AuthDialog';
 import RegisterDialog from './auth/RegisterDialog';
+import ProfileMenuDropdown from './ProfileMenuDropdown';
 
-const Header: React.FC = () => {
+interface TProps {
+    session: Session | null
+}
+
+async function Header({ session }: TProps) {
     return (
         <header
             className="fixed top-0 left-0 w-full
@@ -19,8 +24,17 @@ const Header: React.FC = () => {
             </div>
             <nav style={{ marginRight: '10%' }}>
                 <ul className="flex space-x-4 items-center">
-                    <li><AuthDialog /></li>
-                    <li><RegisterDialog /></li>
+                    {!session && (
+                        <>
+                            <li><AuthDialog /></li>
+                            <li><RegisterDialog /></li>
+                        </>
+                    )}
+                    {session && (
+                        <>
+                            <li><ProfileMenuDropdown /></li>
+                        </>
+                    )}
                 </ul>
             </nav>
         </header>

@@ -53,11 +53,23 @@ const Sidebar: React.FC = () => {
                             </Accordion>
                         )}
                         {!expanded && (
-                            <SidebarItem
-                                icon={<User size={20} />}
-                                text="Dashboard"
-                                href="/dashboard"
-                            />
+                            <>
+                                <SidebarItem
+                                    icon={<User size={20} />}
+                                    text="Dashboard"
+                                    href="/dashboard"
+                                />
+                                <SidebarItem
+                                    icon={<User size={20} />}
+                                    text="Dashboard"
+                                    href="/dashboard"
+                                />
+                                <SidebarItem
+                                    icon={<User size={20} />}
+                                    text="Dashboard"
+                                    href="/dashboard"
+                                />
+                            </>
                         )}
                     </ul>
                 </SidebarContext.Provider>
