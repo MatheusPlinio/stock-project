@@ -1,7 +1,7 @@
 export default function page() {
     return (
-        <div className="w-full">
-
+        <div>
+            <h2>Comprovante de Endereço</h2>
         </div>
     )
 }

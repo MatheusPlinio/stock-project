@@ -47,6 +47,11 @@ async function Header({ session }: TProps) {
                                     <Coins size={30} className='text-yellow-500' />
                                 </div>
                             </Button></li>
+                            <li>
+                                <Button className='bg-indigo-500 hover:bg-indigo-700'>
+                                    Depositar
+                                </Button>
+                            </li>
                         </>
                     )}
                 </ul>
