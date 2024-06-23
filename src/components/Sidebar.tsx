@@ -15,7 +15,7 @@ const Sidebar: React.FC = () => {
             <nav className="h-full flex flex-col bg-white border-r shadow-sm">
                 <div className="p-4 pb-2 flex justify-between items-center">
                     {expanded && (
-                        <Button className={`bg-green-700 overflow-hidden transition-all w-48`}>
+                        <Button className={`bg-indigo-500 overflow-hidden transition-all w-48`}>
                             Ganhe bônus
                         </Button>
                     )}

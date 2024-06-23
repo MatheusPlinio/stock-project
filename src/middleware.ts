@@ -11,11 +11,14 @@ export async function middleware(req: NextRequest) {
         "/account",
         "/account/transactions",
         "/account/restrictions",
-        "/account/profile",
         "/account/preferences",
         "/account/history-game",
         "/account/chat-blocks",
-        "/account/api"
+        "/account/api",
+        "/account/documents/info",
+        "/account/documents/personal",
+        "/account/documents/proof-of-address",
+        "/account/documents/proof-of-identification"
     ];
 
     if (token || pathname.includes("/api/auth") || pathname === "/") {
@@ -36,10 +39,13 @@ export const config = {
         "/account",
         "/account/transactions",
         "/account/restrictions",
-        "/account/profile",
         "/account/preferences",
         "/account/history-game",
         "/account/chat-blocks",
-        "/account/api"
+        "/account/api",
+        "/account/documents/info",
+        "/account/documents/personal",
+        "/account/documents/proof-of-address",
+        "/account/documents/proof-of-identification"
     ]
 }
