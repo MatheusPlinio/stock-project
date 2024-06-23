@@ -1,8 +1,9 @@
 'use client'
-import { ChevronLast, ChevronFirst, User } from "lucide-react";
+import { ChevronLast, ChevronFirst, User, DollarSign } from "lucide-react";
 import Link from "next/link";
 import React, { useContext, createContext, useState, ReactNode } from "react";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "./ui/accordion";
+import { Button } from "./ui/button";
 
 const SidebarContext = createContext({ expanded: true });
 
@@ -10,14 +11,14 @@ const Sidebar: React.FC = () => {
     const [expanded, setExpanded] = useState(true);
 
     return (
-        <aside className={`transition-all flex ${expanded ? "w-52" : "w-16"}`}>
+        <aside className={`transition-all flex ${expanded ? "w-48" : "w-16"}`}>
             <nav className="h-full flex flex-col bg-white border-r shadow-sm">
                 <div className="p-4 pb-2 flex justify-between items-center">
-                    <img
-                        src="https://img.logoipsum.com/243.svg"
-                        className={`overflow-hidden transition-all ${expanded ? "w-32" : "w-0"}`}
-                        alt=""
-                    />
+                    {expanded && (
+                        <Button className={`bg-green-700 overflow-hidden transition-all w-48`}>
+                            Ganhe bônus
+                        </Button>
+                    )}
                     <button
                         onClick={() => setExpanded((curr) => !curr)}
                         className="p-1.5 rounded-lg bg-gray-50 hover:bg-gray-100"
@@ -27,7 +28,7 @@ const Sidebar: React.FC = () => {
                 </div>
 
                 <SidebarContext.Provider value={{ expanded }}>
-                    <ul className="flex-1 px-3">
+                    <ul className="flex-1 px-3 transition-all duration-700">
                         {expanded && (
                             <Accordion type="single" collapsible defaultValue="item-1">
                                 <AccordionItem value="item-1">

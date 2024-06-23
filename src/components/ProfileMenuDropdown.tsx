@@ -20,7 +20,7 @@ export default function ProfileMenuDropdown() {
                         </Link>
                     </DropdownMenuItem>
                     <DropdownMenuItem className="p-0 m-0">
-                        <Link href="/conta" className="flex items-center justify-start w-full p-2 text-gray-400 hover:text-indigo-500 transition-colors duration-300">
+                        <Link href="/balance" className="flex items-center justify-start w-full p-2 text-gray-400 hover:text-indigo-500 transition-colors duration-300">
                             <div className="mr-2">
                                 <Gift size={20} />
                             </div>
