@@ -7,7 +7,15 @@ export async function middleware(req: NextRequest) {
     const { pathname } = req.nextUrl;
 
     const protectedRoutes = [
-        "/balance"
+        "/balance",
+        "/account",
+        "/account/transactions",
+        "/account/restrictions",
+        "/account/profile",
+        "/account/preferences",
+        "/account/history-game",
+        "/account/chat-blocks",
+        "/account/api"
     ];
 
     if (token || pathname.includes("/api/auth") || pathname === "/") {
@@ -24,6 +32,14 @@ export async function middleware(req: NextRequest) {
 
 export const config = {
     matcher: [
-        "/balance"
+        "/balance",
+        "/account",
+        "/account/transactions",
+        "/account/restrictions",
+        "/account/profile",
+        "/account/preferences",
+        "/account/history-game",
+        "/account/chat-blocks",
+        "/account/api"
     ]
 }
