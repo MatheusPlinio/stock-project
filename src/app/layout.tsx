@@ -31,9 +31,11 @@ export default async function RootLayout({
         <NextAuthSessionProvider>
           <div className="flex flex-col h-screen">
             <Header session={session} />
-            <div className="flex justify-between flex-1 pt-16">
+            <div className="flex flex-auto justify-between pt-16">
               <Sidebar />
-              {children}
+              <main className="w-full">
+                {children}
+              </main>
               <Toaster />
             </div>
           </div>
