@@ -11,7 +11,7 @@ const Sidebar: React.FC = () => {
     const [expanded, setExpanded] = useState(true);
 
     return (
-        <aside className={`transition-all flex ${expanded ? "w-48" : "w-16"}`}>
+        <aside className="flex">
             <nav className="h-full flex flex-col bg-white border-r shadow-sm">
                 <div className="p-4 pb-2 flex justify-between items-center">
                     {expanded && (

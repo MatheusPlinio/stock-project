@@ -10,7 +10,7 @@ export default function ProfileMenuDropdown() {
                 <DropdownMenuTrigger className="flex items-center"><User size={20} /></DropdownMenuTrigger>
                 <DropdownMenuContent>
                     <DropdownMenuItem className="p-0 m-0">
-                        <Link href="/conta" className="flex items-center justify-start w-full p-2 text-gray-400 hover:text-indigo-500 transition-colors duration-300">
+                        <Link href="/account/profile" className="flex items-center justify-start w-full p-2 text-gray-400 hover:text-indigo-500 transition-colors duration-300">
                             <div className="mr-2">
                                 <User size={20} />
                             </div>
